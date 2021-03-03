@@ -13,17 +13,29 @@ const viewsPath = path.join(__dirname, '/resources/views');
 //Assets (mtlb express server response deta h html response to use btana hoga ki sari cheeze kha rkhi h css,js and all so that it can include them too with html)
 app.use(express.static('public'));
 
-//routes
-app.get('/', (req, res) => {
-    res.render('home')
-})
-
-
-
 //set template engine
 app.use(expressLayout);
 app.set('views', viewsPath);
 app.set('view engine', 'ejs');
+
+
+//routes
+app.get('/', (req, res) => {
+    res.render('home')
+})
+app.get('/cart', (req, res) => {
+    res.render('customers/cart')
+})
+app.get('/login', (req, res) => {
+    res.render('auth/login')
+})
+app.get('/register', (req, res) => {
+    res.render('auth/register')
+})
+
+
+
+
 
 
 
