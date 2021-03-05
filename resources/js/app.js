@@ -1,8 +1,16 @@
 import axios from 'axios';
 import Noty from 'noty';
+import {initAdmin} from './admin'
 
 let addToCart = document.querySelectorAll('.add-to-cart');
 let cartCounter = document.querySelector('#cartCounter');
+
+addToCart.forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+        let pizza=JSON.parse(btn.dataset.pizza)//convert back to object//jo home.js me data-set likha tha btn pr usme 'data' predefined hota h apna bs nam hota h jse yha pizza diya hmne to dataset se wo data hme mil jayega jo hmne wha set kiya tha.
+        updateCart(pizza);
+    })
+})
 
 function updateCart(pizza) {
     axios.post('/update-cart', pizza).then(res => {
@@ -25,9 +33,14 @@ function updateCart(pizza) {
     })
 }
 
-addToCart.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-        let pizza=JSON.parse(btn.dataset.pizza)//convert back to object//jo home.js me data-set likha tha btn pr usme 'data' predefined hota h apna bs nam hota h jse yha pizza diya hmne to dataset se wo data hme mil jayega jo hmne wha set kiya tha.
-        updateCart(pizza);
-    })
-})
+//remove success alert after x seconds
+const alertmsg = document.querySelector('#success-alert');
+if (alertmsg) {
+    setTimeout(() =>
+    {
+        alertmsg.remove();
+    },2000)
+}
+
+initAdmin();
+
