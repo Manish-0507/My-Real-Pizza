@@ -7,7 +7,7 @@ function orderController()
         {
             //ab hum kisi ek customer ke orders nhi laa rhe balki admin k liye db se wo sbhi orders la rhe h jo complete nhi hue h .
             Order.find({ status: { $ne: 'completed' } }, null, { sort: { 'createdAt': -1 } })
-                .populate('customerId', '-password').exec((err,orders) =>
+                .populate('customerId', '-password').exec((err,orders) =>//mtlb hum pure data me jo aaya h usme se customerId k through sara data ccess krna chahte h iske karan hum customerId. se kuchh bhi access kr skte h.
                 {
                     if (req.xhr) {
                        return res.json(orders)//yo isliye h bhai kyuki admin.ja m to aapi same url pr request bheja ha to utha khatr aapin page render koni chahiye sirf data chahiye jo utha bnya bnaya page m bhar dyaa.

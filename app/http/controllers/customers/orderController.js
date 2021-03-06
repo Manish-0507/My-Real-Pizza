@@ -20,9 +20,18 @@ function orderController()
             })
             order.save().then(result =>
             {
-                req.flash('success', 'order placed successfully');
-                delete req.session.cart
-                return res.redirect('/customer/orders');
+                Order.populate(result, { path: 'customerId' }, (err,placedOrder) =>//mtlb bhyi hum customerId k basis pr iska pura data chahte h fer hum customerId. krke data access kr skte h
+                {
+                    req.flash('success', 'order placed successfully');
+                    
+                    delete req.session.cart
+                     //emit event for updating admin page dynamically
+                 const eventEmitter = req.app.get('eventEmitter')
+                eventEmitter.emit('orderPlaced',placedOrder );//saved data bheja ha aapi jo nya order krya h user n ibe.
+                    return res.redirect('/customer/orders');
+                 })
+              
+               
             }).catch(err =>
             {
                 req.flash('error', 'Something went wrong!');
@@ -40,6 +49,19 @@ function orderController()
                orders: orders,
                moment:moment//library for managing date formats
             })
+        },
+       
+       /*******************for show live tracking of order*********************/
+       async show(req, res)
+        {
+           const order = await Order.findById(req.params.id);
+           //Authorize User
+           if (req.user._id.toString()===order.customerId.toString()) {//kyuki jo mongodb me id how h w object type ki how h(chahe jaake dekh le objectType likh rakhya h) or 2 objects ko hum ase compare nhi kr skte so hme unhe convert krn hoga strings me.//kyuki customer id e to wa h n userId jista sb user linked h.or usse t e to currently logged in user match howga.       
+               return res.render('customers/singleorder', { order: order })  
+           } else {
+               res.redirect('/');
+           }
+
        }
         
     }

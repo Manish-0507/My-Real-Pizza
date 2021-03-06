@@ -1,42 +1,46 @@
-import moment from 'moment';
-import axios from 'axios';
+import axios from 'axios'
+import moment from 'moment'
+import Noty from 'noty'
 
 
-
+//yo aapi ura isliye bnawa ha taaki jab bhi user order kra to yo admin ala orders update ho jayana chahiye bina page load hoye isliye isna client side t ajax call krangaa.
 function initAdmin()
 {
-    const orderTableBody = document.querySelector('#orderTableBody');
-    let orders = [];
+    const orderTableBody = document.querySelector('#orderTableBody')
+    let orders = []
     let markup
 
-    axios.get('/admin/orders', {//ye is liye h ki data dynamically load hota rhe reload na ho page.
+    axios.get('/admin/orders', {
         headers: {
-           "X-Requested-With":"XMLHttpRequest" 
+            "X-Requested-With": "XMLHttpRequest"
         }
     }).then(res =>
-        {
-            orders = res.data;
-            markup = generateMarkup(orders);
-            orderTableBody.innerHTML = markup;
-        }).catch(err =>
-        {
-            console.log(err);
-        })
+    {
+        orders = res.data
+        markup = generateMarkup(orders)
+        orderTableBody.innerHTML=markup
+    }).catch(err =>
+    {
+        console.log(err)
+    })
 
-    function renderItems(items) {
+    function renderItems(items)
+    {
         let parsedItems = Object.values(items)
-        return parsedItems.map((menuItem) => {
+        return parsedItems.map((menuItem) =>
+        {
             return `
-                <p>${ menuItem.item.name } - ${ menuItem.qty } pcs </p>
+                <p>${menuItem.item.name} - ${menuItem.qty} pcs </p>
             `
         }).join('')
-      }
+    }
 
     function generateMarkup(orders)
     {
         return orders.map(order =>
         {
-            return `<tr>
+            return `
+                <tr>
                 <td class="border px-4 py-2 text-green-900">
                     <p>${order._id}</p>
                     <div>${renderItems(order.items)}</div>
@@ -80,24 +84,22 @@ function initAdmin()
                 <td class="border px-4 py-2">
                     ${order.paymentStatus ? 'paid' : 'Not paid'}
                 </td>
-            </tr>`
-
-        }).join('');//map function array return krta h or pta hi h ki map loop over kr rha h orders pr to har order k array ko join kr rhe h wapis se string type me like fir wo uper neeeche aate rhenge same.like tr k baad tr fir tr ase saari rows join ho jayengi.
+            </tr>
+        `
+        }).join('')////map function array return krta h or pta hi h ki map loop over kr rha h orders pr to har order k array ko join kr rhe h wapis se string type me like fir wo uper neeeche aate rhenge same.like tr k baad tr fir tr ase saari rows join ho jayengi.
     }
-     // Socket
-    // socket.on('orderPlaced', (order) => {
-    //     new Noty({
-    //         type: 'success',
-    //         timeout: 1000,
-    //         text: 'New order!',
-    //         progressBar: false,
-    //     }).show();
-    //     orders.unshift(order)
-    //     orderTableBody.innerHTML = ''
-    //     orderTableBody.innerHTML = generateMarkup(orders)
-    // })
+    
 }
 
 
 
 export { initAdmin };
+    
+
+
+
+
+
+
+
+    
