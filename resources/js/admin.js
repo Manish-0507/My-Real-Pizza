@@ -1,6 +1,6 @@
 import axios from 'axios'
 import moment from 'moment'
-import Noty from 'noty'
+
 
 
 //yo aapi ura isliye bnawa ha taaki jab bhi user order kra to yo admin ala orders update ho jayana chahiye bina page load hoye isliye isna client side t ajax call krangaa.

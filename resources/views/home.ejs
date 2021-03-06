@@ -1,22 +1,25 @@
 <section class="hero py-16">
     <div class="container mx-auto flex items-center justify-between">
+
         <div class="w-1/2" id="hero1">
-            <!--width 50%-->
+            <!--width 50% ,,,,,,,yo jo nicha md:text-6xl h iska mtlb h md ek braekpoint h 768px ka jis pr bhyi min-width 768px bhyi ista uper hote e text bda hojya isi property set kri h aapin. -->
             <h6 class="text-lg" id="hungry"><em>Are You Hungry?</em></h6>
-            <h1 class="text-6xl font-bold" id="hungry1">Don't wait !</h1>
-            <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-7">Order Now</button>
+            <!--tailwind css mobile first approach use kra h mtlb pehli aapi wa likhanga jo mobile m chahiye fer uski modified version likhanga jistra text-3xl pehle likhya fer baad m jo chahiye wo likhya.-->
+            <h1 class="text-3xl md:text-6xl font-bold" id="hungry1">Don't wait !</h1>
+            <a class="btn-primary px-6 py-2 rounded-full text-white font-bold " id="order-now" href="#menu">Order
+                Now</a>
         </div>
         <div class="w-1/2" id="hero2">
             <img src="/img/hero-pizza.png" alt="">
         </div>
     </div>
 </section>
-<section class="menu container mx-auto items-center">
+<section class="menu container mx-auto items-center mb-4" id="menu">
     <h1 class="text-xl font-bold mb-8">All Pizzas</h1>
-    <div class="grid grid-cols-4 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-9">
         <% myPizza.forEach((pizza)=>{%>
-        <div class="w-100">
-            <img class="h-40 mb-4 mx-auto" src="/img/<%=pizza.image%>" alt="">
+        <div class=" w-full md:w-100">
+            <img class="h-40 mb-4  mx-auto" src="/img/<%=pizza.image%>" alt="">
             <div class="text-center">
                 <h2 class="mb-4 text-lg"><%=pizza.name%></h2>
                 <span class="py-1 px-4 rounded-full uppercase text-xs size"><%=pizza.size%></span>

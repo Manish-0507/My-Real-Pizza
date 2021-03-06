@@ -30,6 +30,9 @@ function initRoutes(app) {
     app.get('/admin/orders', admin, AdminOrderController().index);
     app.post('/admin/order/status', admin, statusController().statusUpdate);
 
+
+  
+
 }
 
 

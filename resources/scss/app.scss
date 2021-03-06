@@ -1,13 +1,18 @@
 @import './variables';
-//for noty library,used in app.js
 @import '~noty/src/noty.scss';
 @import '~noty/src/themes/mint.scss';
 
+html{
+    scroll-behavior: smooth;
+}
 body {
-	font-family: 'Lato', sans-serif;
-	color: $dark;
-	width: 100%;
-	
+    font-family: 'Lato', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: $dark;
+    
+}
+html{
+    scroll-behavior: smooth!important;
 }
 /*******Scroll bar design************/
 body::-webkit-scrollbar {
@@ -31,178 +36,225 @@ nav li:last-child a {
 	}
 }
 
+nav li:last-child a {
+    background: $primary;
+    &:hover {
+        background: $primary-hover;
+    }
+}
+
 nav li a {
-	transition: $smooth;
-	&:hover {
-		color: $primary;
-	}
+    transition: $smooth;
+    &:hover {
+        color: $primary;
+    }
 }
 section.hero {
-	background: black;
-	height:calc(100vh-86px)
+    background: $secondary;
 }
-.menu{
-	min-height:100vh
+#hero1{
+    position: relative;
 }
-#hungry,
-#hungry1 {
-	color: white;
+#order-now{
+     position: absolute;
+     margin-top: 20px;
 }
+
+
 .size {
-	background: $secondary;
+    background: $secondary;
 }
 .add-to-cart {
-	border: 2px solid $primary;
-	color: $primary;
-	transition: $smooth;
-	&:hover {
-		background: $primary;
-		border-color: $pure;
-		color: $pure;
-	}
-	&:focus {
-		outline: none;
-	}
+    border: 2px solid $primary;
+    color: $primary;
+    transition: $smooth;
+    &:hover {
+        background: $primary;
+        border-color: $pure;
+        color: $pure;
+    }
+    &:focus {
+        outline: none;
+    }
 }
 
 .btn-primary {
-	background: $primary;
-	transition: $smooth;
-	&:hover {
-		background: $primary-hover;
-	}
+    background: $primary;
+    transition: $smooth;
+    &:hover {
+        background: $primary-hover;
+    }
 }
 
 section.cart {
-	background: $secondary;
-	.amount {
-		color: $primary;
-	}
+    background: $secondary;
+    .amount {
+        color: $primary;
+    }
 }
 
 section.login {
-	background: $secondary;
-	min-height: calc(100vh-86px); //total-navbar height
-	a {
-		color: $primary;
-		&:hover {
-			color: $primary-hover;
-		}
-	}
+    background: $secondary;
+    a {
+        color: $primary;
+        &:hover {
+            color: $primary-hover;
+        }
+    }
 }
 .noty_theme__mint {
-	border-radius: 50px !important;
-	padding-left: 8px !important;
-}
-a.link{
-	color:$primary;
-}
-section.status{
-	background: $secondary;
-	min-height:636px//100vh =722px and 722-86(decrease nevbar height)
-}
-.status-box{
-	padding: 60px 0 0;
+    border-radius: 50px!important;
+    padding-left: 8px!important;
 }
 
-.status-box ul li{
-	margin-left: 84px;
+a.link {
+    color: $primary;
 }
-//dots
-.status-box ul li span{
-	position: relative;
-	padding-left: 20px;
+
+section.status {
+    background: $secondary;
+    min-height: calc(100vh - 86px);
 }
-.status-box ul li span::after{
-	content: '';
-	position: absolute;
-	left:-10px;
-	top: 50%;
-	background: $dark;
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	transform: translateY(-50%);
-	box-shadow: 0 0 1px 10px $secondary;
+.status-box {
+    padding: 60px 0 0;
 }
-//icons
+.status-box ul {
+    margin-left: 84px;
+}
+.status-box ul li span {
+    position: relative;
+    padding-left: 20px;
+}
+// Dots
+.status-box ul li span:after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top:50%;
+    background: $dark;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    box-shadow:0 0 1px 10px $secondary;
+}
+
+// Icons
 .status-box ul li span:before{
-     
-	  font-family:"Line Awesome Free";
-	  font-size: 46px;
-	  font-weight: 600;
-	  position: absolute;
-	  left: -90px;
-	  color: inherit;
+    font-family: "Line Awesome Free";
+    font-size: 46px;
+    font-weight: 600;
+    position: absolute;
+    left: -90px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: inherit;
 }
-.status-box ul li:nth-child(1) span:before{//selected first span from list items.
- content:'\f46c';
-	   content:'\f46c';
-}
-.status-box ul li:nth-child(2) span:before{//selected first span from list items.
- content:'\f46c';
-	   content:'\f560';
-}
-.status-box ul li:nth-child(3) span:before{//selected first span from list items.
- content:'\f46c';
-	   content:'\f818';
-}
-.status-box ul li:nth-child(4) span:before{//selected first span from list items.
- content:'\f46c';
-	   content:'\f0d1';
-}
-.status-box ul li:nth-child(5) span:before{//selected first span from list items.
- content:'\f46c';
-	   content:'\f582';
+.status-box ul li:nth-child(1) span:before {
+    content: '\f46c';
 }
 
-//line
-.status-box ul li{
-	position: relative;
-}
-.status-box ul li:before{
-	content: '';
-	position: absolute;
-	top: 0;
-	left: -6px;
-	width: 2px;
-	height: 100%;
-	background: $dark;
-	margin-top: 10px;
-}
-//last dot
-.status-box ul li:nth-child(5) span:after{
-box-shadow: 0 20px 1px 20px $secondary;
+.status-box ul li:nth-child(2) span:before {
+    content: '\f560';
 }
 
-//line made gray
-.status-box ul li.step-completed:before{
-	background: $gray;
+.status-box ul li:nth-child(3) span:before {
+    content: '\f818';
 }
 
-//dot made gray
-.status-box ul li.step-completed span:after{
-	background: $gray;
+.status-box ul li:nth-child(4) span:before {
+    content: '\f0d1';
 }
 
-//text
-.status-box ul li.step-completed span{
-	color: $gray;
+.status-box ul li:nth-child(5) span:before {
+    content: '\f582';
+}
+.status-box ul li {
+    position: relative;
+}
+// Line
+.status-box ul li:before {
+   content: '';
+   position: absolute;
+   top: 0;
+   left: -6px;
+   width: 2px;
+   height: 100%;
+   background: $dark;
+   margin-top: 10px;
+}
+// Last dot
+.status-box ul li:nth-child(5) span:after {
+    box-shadow:0 20px 1px 20px $secondary;
+}
+
+// line
+.status-box ul li.step-completed:before {
+    background: $gray;
+}
+
+// dots
+.status-box ul li.step-completed span:after {
+    background: $gray;
+}
+
+// text
+.status-box ul li.step-completed span {
+    color: $gray;
+}
+
+// Current status
+.status-box ul li.current-status span {
+    color: $primary;
+}
+
+.status-box ul li.current-status span:after {
+    background: $primary;
+}
+
+.status-box ul li small {
+    float: right;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+@media(max-width:1060px) {
+    .container {
+        max-width: 90%;
+    }
+    table {
+       display: block;
+       overflow-x: auto;
+       white-space: nowrap;
+    }
+}
+@media(min-width:1530px){
+.container{
+	max-width: 90%;
+}
+}
+
+@media(max-width: 768px) {
+    .status-box ul li span:before {
+        font-size: 34px;
+    }
+}
+.quantity-div{
+    position: relative;
+}
+.quantity{
+     position: absolute;
+    //  border: 2px solid black;
+    //  width:auto;
+    //  left: 286px;
+    //  left: 50px;
+    //  width: 4%;
+    // border: 1px solid black;
 }
 
 
-//current status
-.status-box ul li.current-status span{
-	color: $primary;
-}
-.status-box ul li.current-status span:after{
-background: $primary;	
-}
-.status-box ul li small{
-	float: right;
-	font-size: 14px;
-	
-}
+
+
 
 
 

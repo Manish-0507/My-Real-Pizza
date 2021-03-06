@@ -68,6 +68,10 @@ app.set('view engine', 'ejs');
 
 //routes
 require('./routes/web')(app);
+app.use((req, res) =>//middleware which will run when all routes are checked and no route is found! then it comes here.
+{
+    res.status(404).send(`<h1>404 PAGE NOT FOUND`);
+})
 
 
 const server=app.listen(PORT, () => {

@@ -44,7 +44,12 @@ if (alertmsg) {
 }
 
 
-initAdmin();
+//it is showing a error becoz generatemarkup funcn in admin js gets order argument only at admin route so on other pages it shows error.
+let adminAreaPath = window.location.pathname;
+if (adminAreaPath.includes('admin')) {
+    initAdmin();
+}
+
 
 
 //change order status

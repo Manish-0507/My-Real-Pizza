@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/myPizza',
+mongoose.connect(process.env.MONGO_CONNECTION_URL,
     {
         useNewUrlParser: true, useCreateIndex: true,
         useUnifiedTopology: true, useFindAndModify: true
