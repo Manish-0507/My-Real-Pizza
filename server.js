@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const ejs = require('ejs');
+
 const path = require('path');
 const expressLayout = require('express-ejs-layouts');
 const PORT = process.env.PORT || 3000;
@@ -107,7 +107,7 @@ eventEmitter.on('orderPlaced',(data) =>
     io.to('adminRoom').emit('orderPlaced', data);
 })
 
-
+//mongodb://localhost:27017/myPizza
 
 
 
