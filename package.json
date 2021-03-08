@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server.js -e ejs,js,css",
-    "start":"node server.js",
+    "start": "node server.js",
     "development": "mix",
     "watch": "mix watch",
     "watch-poll": "mix watch -- --watch-options-poll=1000",
@@ -15,6 +15,7 @@
   "author": "Manish",
   "license": "ISC",
   "dependencies": {
+    "@stripe/stripe-js": "^1.13.1",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.2.2",
@@ -29,7 +30,8 @@
     "noty": "^3.2.0-beta-deprecated",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "socket.io": "^3.1.2"
+    "socket.io": "^3.1.2",
+    "stripe": "^8.137.0"
   },
   "devDependencies": {
     "laravel-mix": "^6.0.13",

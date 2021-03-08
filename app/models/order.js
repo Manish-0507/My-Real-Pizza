@@ -24,7 +24,11 @@ const orderSchema = new Schema({
         type: String,
         default:'Cash on Delivery'
     },
-    status:{type:String,default:'order_placed'}
+    status: { type: String, default: 'order_placed' },
+    paymentStatus: {
+        type:Boolean,
+        default:false
+    }
 
 }, { timestamps: true })
 

@@ -239,17 +239,47 @@ section.status {
         font-size: 34px;
     }
 }
-.quantity-div{
-    position: relative;
+
+//Stripe Styling
+// .stripeElement{
+//     box-sizing: border-box;
+//     width: 50%;
+//     height:40px;
+//     padding: 10px 12px;
+
+//     border: 1px solid transparent;
+//     border-radius: 4px;
+//     background-color: white;
+
+//     box-shadow: 0 1px 3px 0 #e6ebf1;
+//     -webkit-transition:box-shadow 150ms ease;
+//     transition:box-shadow 150ms ease;
+// }
+
+// .stripeElement--focus{
+//     box-shadow:0 1px 3px 0 #cfd7df;
+// }
+// .stripeElement--invalid{
+//     border-color: #fa755a;
+// }
+// .stripeElement--webkit-autofill{
+//     background-color: #fefde5!important;
+// }
+
+#card-element{
+    width: 50%;
+    margin-left: auto;
+    box-sizing: border-box;
+    height:40px;
+    padding: 10px 12px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
 }
-.quantity{
-     position: absolute;
-    //  border: 2px solid black;
-    //  width:auto;
-    //  left: 286px;
-    //  left: 50px;
-    //  width: 4%;
-    // border: 1px solid black;
+
+#card-element--webkit-autofill{
+    background-color: #fefde5!important;
 }
 
 

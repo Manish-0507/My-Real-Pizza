@@ -1,41 +1,70 @@
-const Order = require('../../../models/order');
-const moment=require('moment')
-
-function orderController()
-{
-    return {
+  
+const Order = require('../../../models/order')
+const moment = require('moment')
+const stripe = require('stripe')(process.env.PRIVATE_STRIPE_KEY)
+function orderController () {
+     return {
         //*********for saving order in database********* */
-        store(req,res)
-        {
-            const { phone, address } = req.body;
-            if (!phone || !address) {
-                req.flash('error', 'All fields are required!!');
-                return res.redirect('/cart')
+        store(req, res) {
+            // Validate request
+            const { phone, address, stripeToken, paymentType } = req.body
+            if(!phone || !address) {
+                return res.status(422).json({ message : 'All fields are required' });
             }
+
             const order = new Order({
-                customerId: req.user._id,//wo bear e h tna global user set krya tha server js m jo current log in user how h wo.
-                 items:req.session.cart.items,//yo bhi wo e system h global session aala server js m .
-                phone,
+                
+                customerId: req.user._id,
+                //wo bear e h tna global user set krya tha server js m jo current log in user how h wo.
+                items: req.session.cart.items,
+                 //yo bhi wo e system h global session aala server js m .
+                 phone,
                 address
             })
-            order.save().then(result =>
-            {
-                Order.populate(result, { path: 'customerId' }, (err,placedOrder) =>//mtlb bhyi hum customerId k basis pr iska pura data chahte h fer hum customerId. krke data access kr skte h
-                {
-                    req.flash('success', 'order placed successfully');
+             order.save().then(result => {
+               //mtlb bhyi hum customerId k basis pr iska pura data chahte h fer hum customerId. krke data access kr skte h
+               Order.populate(result, { path: 'customerId' }, (err, placedOrder) => {
+                    //due to fact that now we are using ajax for order(for applying payment gateway) so no need of this.
+                    // req.flash('success', 'order placed successfully');
                     
-                    delete req.session.cart
-                     //emit event for updating admin page dynamically
-                 const eventEmitter = req.app.get('eventEmitter')
-                eventEmitter.emit('orderPlaced',placedOrder );//saved data bheja ha aapi jo nya order krya h user n ibe.
-                    return res.redirect('/customer/orders');
+                    //stripe payment
+                     if(paymentType === 'card') {
+                        stripe.charges.create({
+                           //we want payment in rupees so it accepts in paise so *100.
+                           amount: req.session.cart.totalPrice  * 100,
+                            source: stripeToken,
+                            currency: 'inr',
+                            description: `Pizza order: ${placedOrder._id}`
+                        }).then(() => {
+                            placedOrder.paymentStatus = true
+                            placedOrder.paymentType = paymentType
+                            placedOrder.save().then((ord) => {
+                                // Emit
+                                console.log('saved')
+                                const eventEmitter = req.app.get('eventEmitter')
+                                eventEmitter.emit('orderPlaced', ord)
+                                delete req.session.cart
+                                return res.json({ message : 'Payment successful, Order placed successfully' });
+                            }).catch((err) => {
+                                console.log(err)
+                            })
+
+                        }).catch((err) => {
+                            delete req.session.cart
+                            return res.json({ message : 'OrderPlaced but payment failed, You can pay at delivery time' });
+                        })
+                    } else {
+                        delete req.session.cart
+                        return res.json({ message : 'Order placed succesfully' });
+                    }
+                   
+                    //due to fact that now we are using ajax for order(for applying payment gateway
+                    // return res.redirect('/customer/orders');
                  })
-              
-               
             }).catch(err =>
             {
-                req.flash('error', 'Something went wrong!');
-                return res.redirect('/cart');  
+                 return res.status(500).json({ message: ' Something Went Wrong!!' })
+                 
             })
         },
         //*******for showing all orders of customer******* */

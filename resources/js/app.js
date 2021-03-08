@@ -1,7 +1,8 @@
 import axios from 'axios';
 import Noty from 'noty';
 import moment from 'moment'
-import {initAdmin} from './admin'
+import { initAdmin } from './admin'
+import {initStripe} from './stripe'
 
 let addToCart = document.querySelectorAll('.add-to-cart');
 let cartCounter = document.querySelector('#cartCounter');
@@ -62,7 +63,7 @@ order = JSON.parse(order)
 let time = document.createElement('small')
 
 function updateStatus(order) {
-    statuses.forEach((status) => {
+    statuses.forEach((status) => {// //pehle sari classes htaa de fir nyi jud jayengi nhi to pehle ki bhi judi rh jaati h.
         status.classList.remove('step-completed')
         status.classList.remove('current-status')
     })
@@ -72,7 +73,7 @@ function updateStatus(order) {
        if(stepCompleted) {
             status.classList.add('step-completed')
        }
-       if(dataProp === order.status) {
+       if(dataProp === order.status) {// //agr jo order server t aarya h uska status or looping k through data property apni list m jis bhi list pr match hojya.
             stepCompleted = false
             time.innerText = moment(order.updatedAt).format('hh:mm A')
             status.appendChild(time)
@@ -86,8 +87,11 @@ function updateStatus(order) {
 
 updateStatus(order);
 
-// //pehle sari classes htaa de fir nyi jud jayengi nhi to pehle ki bhi judi rh jaati h.
-// //agr jo order server t aarya h uska status or looping k through data property apni list m jis bhi list pr match hojya.
+
+//stripe related and order-now btn related data.
+initStripe();
+
+
 
 
 //Socket

@@ -27,7 +27,7 @@ app.set('eventEmitter', eventEmitter);//hmne ise apne 'app'(jisme express() h) u
 app.use(session({
     secret: process.env.COOKIE_SECRET,
     resave: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_CONNECTION_URL }),
+    store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/myPizza' }),
     collection:'sessions',
     saveUninitialized: false,
     cookie:{maxAge:1000*60*60*24}//maximum life of a cookie.
@@ -102,12 +102,9 @@ eventEmitter.on('orderUpdated', (data) =>
 //wo basically ek private room tha jiska naam wa id e thior fer server.js m wa event catch kr li or fer us naam t e ura room join kr diya.hoge donu aapas m connect.  
 //fer status controller m t event emit hoi change hote e data with changed data passed.fer wa event catch kr li ura server js m fer us room m io.to() krke wo e room jo join krya tha usma e event emit kr di with that updated data.fer app.js m catch kr li or order jo purana tha utha wo update kr diya nya data k saath.
 
-eventEmitter.on('orderPlaced',(data) =>
-{
-    io.to('adminRoom').emit('orderPlaced', data);
-})
 
-//mongodb://localhost:27017/myPizza
+
+
 
 
 
