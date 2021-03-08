@@ -27,7 +27,7 @@ app.set('eventEmitter', eventEmitter);//hmne ise apne 'app'(jisme express() h) u
 app.use(session({
     secret: process.env.COOKIE_SECRET,
     resave: false,
-    store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/myPizza' }),
+    store: MongoStore.create({ mongoUrl:process.env.MONGO_CONNECTION_URL }),
     collection:'sessions',
     saveUninitialized: false,
     cookie:{maxAge:1000*60*60*24}//maximum life of a cookie.
