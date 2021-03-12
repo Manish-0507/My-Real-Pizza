@@ -503,6 +503,18 @@ section.status {
   margin-top: 8px;
 }
 
+#card-element {
+  width: 50%;
+  margin-left: auto;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+}
+
 @media (max-width: 1060px) {
   .container {
     max-width: 90%;
@@ -523,19 +535,8 @@ section.status {
   .status-box ul li span:before {
     font-size: 34px;
   }
-}
-#card-element {
-  width: 50%;
-  margin-left: auto;
-  box-sizing: border-box;
-  height: 40px;
-  padding: 10px 12px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background-color: white;
-  box-shadow: 0 1px 3px 0 #e6ebf1;
-}
 
-#card-element--webkit-autofill {
-  background-color: #fefde5 !important;
+  #card-element {
+    width: 75%;
+  }
 }
